@@ -1,0 +1,9 @@
+#!/bin/sh
+
+x=$1
+
+set -- $(xwininfo -root| awk -F '[ :]+' '/ (Width|Height):/ { print $3 }')
+width=$1
+height=$2
+
+wmctrl -r :ACTIVE: -e 0,$((((width/4))*x)),0,$(((width/4)-10)),$((height-50))

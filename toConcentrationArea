@@ -1,0 +1,14 @@
+#!/bin/sh
+
+x=$1
+
+set -- $(xwininfo -root| awk -F '[ :]+' '/ (Width|Height):/ { print $3 }')
+width=$1
+height=$2
+
+if [ $x -eq "1" ] 
+then
+	wmctrl -r :ACTIVE: -e 0,$((width/2)),0,$(((width)/3)),$((height-40))
+else
+	wmctrl -r :ACTIVE: -e 0,$(((width/2)/3)),0,$(((width)/3)),$((height-40))
+fi
